@@ -1,17 +1,17 @@
 <template>
   <div>
       <Search></Search>
-      <SiteList></SiteList>
+      <siteList></siteList>
   </div>
 </template>
 
 <script>
-import SiteList from '@/components/SiteList'
+import siteList from '@/components/siteList'
 import Search from '@/components/Search'
 export default {
     name:'Site',
     components:{
-        SiteList,
+        siteList,
         Search
     }
 }

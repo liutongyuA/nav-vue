@@ -1,23 +1,21 @@
 <template>
   <div>
     <ul class="siteList">
-      <li class="content">
-        <a href="https://www.bilibili.com/">
+      <li class="content" v-for="(i,index) in siteList" :key="index">
           <div class="site">
             <div class="logo">
-              <img src="https://www.bilibili.com/favicon.ico" />
+              <img :src="`${i.url}/favicon.ico`" />
             </div>
             <div class="close">
               <svg class="icon">
                 <use xlink:href="#i-close"></use>
               </svg>
             </div>
-            <div class="text">bilibili.com</div>
+            <div class="text">{{i.text}}</div>
           </div>
-        </a>
       </li>
 
-      <li class="content">
+      <!-- <li class="content">
         <a href="https://www.bilibili.com/">
           <div class="site">
             <div class="logo">
@@ -57,7 +55,7 @@
             <div class="text">谷歌</div>
           </div>
         </a>
-      </li>
+      </li> -->
       <!-- 增加地址 -->
       <li class="last">
         <div class="site">
@@ -75,7 +73,27 @@
 </template>
 
 <script>
-export default {};
+export default {
+    name:'siteList',
+    data() {
+        return {
+            siteList:[
+                {
+                    url:'https://www.baidu.com',
+                    text:'百度'
+                },
+                {
+                    url:'https://juejin.cn/',
+                    text:'掘金'
+                },
+                {
+                    url:'https://www.zhihu.com/',
+                    text:'知乎'
+                }
+            ]
+        }
+    },
+};
 </script>
 
 <style lang="less" scoped>
@@ -110,7 +128,7 @@ export default {};
       width: 64px;
       height: 64px;
       background-color: rgba(211, 211, 211,0.5);
-      padding: 10px;
+      padding: 12px;
       border-radius: 50%;
       /* 如果里面是字 */
       font-size: 64px;
