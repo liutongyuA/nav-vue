@@ -163,6 +163,7 @@ export default {
   display: none;
 }
  .last{
+   cursor: pointer;
     .icon {
     width: 64px;
     height: 64px;
@@ -170,6 +171,10 @@ export default {
  }
  > .content:hover .close {
   display: block;
+}
+ > .content:hover .site {
+   cursor: pointer;
+    background-color: rgba(211, 211, 211,0.1);
 }
 }
 // @media (min-width:500px){

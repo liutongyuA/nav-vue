@@ -37,6 +37,9 @@ a {
   background-attachment: fixed;
   background-size: cover;
   background-color: #464646;
+  /* position:absolute; */
+  overflow: hidden;
+  /* display: flex; */
 }
 .icon {
   width: 1em;
