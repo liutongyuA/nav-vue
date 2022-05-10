@@ -65,7 +65,6 @@
             <use xlink:href="#i-add"></use>
           </svg>
             </div>
-
           <div class="text">新增网站</div>
         </div>
       </li>
@@ -177,13 +176,17 @@ export default {
     background-color: rgba(211, 211, 211,0.1);
 }
 }
-// @media (min-width:500px){
-//     .siteList{
-//         justify-content: center;
-//     }
-//     .siteList>li{
-//         margin: 10px 20px;
-//     }
-// }
+@media (min-width:500px){
+    .siteList{
+        justify-content: center;
+        &::after {
+      content: '';
+      width: 0px;
+      }
+          &>li{
+            margin: 10px 20px;
+      }
+    }
+}
 
 </style>

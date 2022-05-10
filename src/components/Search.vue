@@ -1,8 +1,10 @@
 <template>
   <div class="search">
     <form class="searchForm" method="get" action="https://www.baidu.com/s">
-      <span class="aaa"></span>
-      <input name="wd" type="text" />
+      <div class="inputWrapper">
+      <span class="seo"></span>
+      <input placeholder="在baidu中搜索，或者输入一个网址" type="text" />
+      </div>
       <button type="submit">搜索</button>
     </form>
   </div>
@@ -19,29 +21,39 @@ export default {
 <style lang="less" scoped>
 .search {
   padding: 20px;
-  position: relative;
   > .searchForm {
     display: flex;
-    >.aaa{
+    justify-content: center;
+    >.inputWrapper{
+      flex-grow: 1;
+      margin-right: 5px;
+      position: relative;
+    >.seo{
       width: 1.5em;
       height: 1.5em;
-      // border: 1px solid red ;
       background-image: url('../assets/baidu.png');
       background-size: 100% 100%;
       position: absolute;
       top: 50%;
-      left: 22px;
+      left: 5px;
       transform: translateY(-50%);
     }
-    > input {
-      width: 100%;
-      padding-left: 28px;
-      margin-right: 10px;
-      border-radius: 4px;
-      height: 40px;
-      /* 输入框颜色 */
-      border: 1px solid #ddd;
+      > input {
+        width: 100%;
+        font-size: 16px;
+        padding-left: 28px;
+        margin-right: 10px;
+        border-radius: 4px;
+        height: 40px;
+        /* 输入框颜色 */
+        border: 1px solid #ddd;
+      }
     }
+    @media (min-width: 500px) {
+      >.inputWrapper{
+        max-width: 400px;
+      }
+  }
     > button {
       white-space: nowrap;
       padding: 0 28px;
@@ -56,7 +68,6 @@ export default {
     }
   }
 }
-  // @media (min-width:500px) {
   @media (min-width:500px) {
     .search{
             // padding-top: 50px;
@@ -76,10 +87,5 @@ export default {
 // }
 // }
 
-@media (min-width: 500px) {
-.searchForm {
-     max-width: 400px;
-     margin: 0 auto;
-}
-}
+
 </style>
