@@ -4,7 +4,8 @@
       <li class="content" v-for="(i,index) in siteList" :key="index">
           <div class="site">
             <div class="logo">
-              <img :src="`${i.url}/favicon.ico`" />
+              <img :src="`${i.url}/favicon.ico`" :onerror="imgDefault"/>
+              <!-- <div v-else>B</div> -->
             </div>
             <div class="close">
               <svg class="icon">
@@ -89,10 +90,17 @@ export default {
                 {
                     url:'https://www.zhihu.com/',
                     text:'知乎'
-                }
-            ]
+                },
+                {
+                    url:'https://www.qq.com/',
+                    text:'腾讯'
+                },
+
+            ],
+            imgDefault:`this.src="${require('../assets/windbell.png')}"`,
         }
     },
+
 };
 </script>
 
