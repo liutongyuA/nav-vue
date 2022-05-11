@@ -3,7 +3,7 @@
     <form class="searchForm" method="get" action="https://www.baidu.com/s">
       <div class="inputWrapper">
       <span class="seo"></span>
-      <input placeholder="在baidu中搜索，或者输入一个网址" type="text" />
+      <input placeholder="在baidu中搜索，或者输入一个网址" type="text" name="value" />
       </div>
       <button type="submit">搜索</button>
     </form>
@@ -20,7 +20,7 @@ export default {
 
 <style lang="less" scoped>
 .search {
-  padding: 20px;
+  padding: 10px;
   > .searchForm {
     display: flex;
     justify-content: center;
