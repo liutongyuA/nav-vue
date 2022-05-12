@@ -4,12 +4,11 @@
       <li class="content" v-for="(i, index) in siteList" :key="index">
         <div class="site" @click="go(i.url)">
           <div class="logo">
-            <!-- :onerror="imgDefault" -->
             <img :src="`${i.url}/favicon.ico`" :onerror="imgDefault" />
           </div>
           <div class="close" @click.stop="closeSite(i)">
             <svg class="icon">
-              <use xlink:href="#i-close"></use>
+              <use xlink:href="#i-chacha"></use>
             </svg>
           </div>
           <div class="text">{{ i.text }}</div>
@@ -27,10 +26,37 @@
         </div>
       </li>
     </ul>
+    <!-- dialog -->
+    <wb-dialog
+        :visible="visible"
+        title="设置标题"
+        :showClose="true"
+        :modal="true"
+        @closeBefore="beforeClose"
+    >
+      <!--      <template slot="header"> 头部标题 </template>-->
+      <template>
+        <div class="a">
+          <span style="margin-right: 1em">站点名称</span>
+          <wb-input v-model="aaa"></wb-input>
+        </div>
+        <div class="b" style="margin-top:1em">
+          <span style="margin-right: 1em">站点网址</span>
+          <wb-input v-model="bbb"></wb-input>
+        </div>
+      </template>
+      <template slot="footer">
+        <wb-button @click="confirm">确认</wb-button>
+        <wb-button @click="beforeClose(false)">取消</wb-button>
+      </template>
+    </wb-dialog>
+
   </div>
 </template>
 
 <script>
+import {wbButton,wbDialog,wbInput} from 'windbell'
+import 'windbell/dist/windbell.css'
 export default {
   name: "siteList",
   data() {
@@ -54,7 +80,16 @@ export default {
         },
       ],
       imgDefault: `this.src="${require("../assets/windbell.png")}"`,
+      // dialog
+       aaa: '',
+      bbb:'',
+      visible:false
     };
+  },
+  components:{
+    wbButton,
+    wbDialog,
+    wbInput
   },
   created(){
     if(localStorage.getItem("siteKey") === null){
@@ -96,19 +131,35 @@ export default {
     },
     //站点新增
     addSite() {
-      let content = prompt("请输入新增网址：");
-      // 后期用dialog改造这里
-      let addsiteList = {
-        url: content,
-        text: this.urlRule(content).charAt(0),
-      };
-      this.siteList.push(addsiteList);
+      // let content = prompt("请输入新增网址：");
+      // // 后期用dialog改造这里
+      // let addsiteList = {
+      //   url: content,
+      //   text: this.urlRule(content).charAt(0),
+      // };
+      // this.siteList.push(addsiteList);
+      this.visible = true
     },
     //站点删除
     closeSite(i){
-      console.log(this.siteList.indexOf);
       let indexClose = this.siteList.indexOf(i)
       this.siteList.splice(indexClose,1)
+    },
+    // dialog
+     confirm(){
+      console.log(this.aaa,this.bbb);
+       let addsiteList = {
+        text: this.aaa,
+        url: this.urlRule(this.bbb).charAt(0),
+      };
+      this.siteList.push(addsiteList);
+      this.beforeClose(false)
+    },
+    //关闭前回调
+    beforeClose(e){
+      this.aaa=''
+      this.bbb=''
+      this.visible = e
     }
   },
 };
