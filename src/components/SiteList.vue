@@ -38,11 +38,14 @@
       <template>
         <div class="a">
           <span style="margin-right: 1em">站点名称</span>
-          <wb-input v-model="aaa"></wb-input>
+          <wb-input v-model="siteName"></wb-input>
         </div>
         <div class="b" style="margin-top:1em">
-          <span style="margin-right: 1em">站点网址</span>
-          <wb-input v-model="bbb"></wb-input>
+          <span>站点网址</span>
+            <svg class="icon">
+              <use xlink:href="#i-xinghao"></use>
+            </svg>
+          <wb-input v-model="siteUrl"></wb-input>
         </div>
       </template>
       <template slot="footer">
@@ -81,8 +84,8 @@ export default {
       ],
       imgDefault: `this.src="${require("../assets/windbell.png")}"`,
       // dialog
-       aaa: '',
-      bbb:'',
+      siteName: '',
+      siteUrl:'',
       visible:false
     };
   },
@@ -114,9 +117,10 @@ export default {
   methods: {
     //整理用户输入地址
     urlRule(url) {
+      console.log('参数',url);
       // 判断如果url没有http开头
       if (url.indexOf("http") !== 0) {
-        console.log("输入地址有误，重新输入！");
+       alert("输入地址有误，重新输入！");
       } else {
         return url
           .replace("https://", "")
@@ -147,18 +151,24 @@ export default {
     },
     // dialog
      confirm(){
-      console.log(this.aaa,this.bbb);
+        //  未填地址
+        //  关闭dialog
+       if(!this.siteUrl){
+         alert('地址不能为空')
+       }else{
        let addsiteList = {
-        text: this.aaa,
-        url: this.urlRule(this.bbb).charAt(0),
-      };
-      this.siteList.push(addsiteList);
+        url: this.siteUrl,
+        text: this.siteName || this.urlRule(this.siteUrl).charAt(0),
+      }
+      this.siteList.push(addsiteList)
       this.beforeClose(false)
+       }
+      // console.log(this.siteUrl,this.urlRule(this.siteUrl));
     },
     //关闭前回调
     beforeClose(e){
-      this.aaa=''
-      this.bbb=''
+      this.siteName=''
+      this.siteUrl=''
       this.visible = e
     }
   },
@@ -235,6 +245,15 @@ export default {
   > .content:hover .site {
     cursor: pointer;
     background-color: rgba(211, 211, 211, 0.1);
+  }
+}
+.b{
+  &>.icon{
+    width: 0.5em;
+    height: 0.5em;
+    margin-bottom: 7px;
+    margin-right: 0.5em;
+    fill:red
   }
 }
 @media (min-width: 500px) {
