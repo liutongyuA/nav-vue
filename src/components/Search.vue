@@ -3,7 +3,7 @@
     <form class="searchForm" method="get" action="https://www.baidu.com/s">
       <div class="inputWrapper">
       <span class="seo"></span>
-      <input placeholder="在baidu中搜索，或者输入一个网址" type="text" name="value" />
+      <input placeholder="在baidu中搜索，或者输入一个网址" type="text" name="wd" />
       </div>
       <button type="submit">搜索</button>
     </form>
@@ -60,8 +60,9 @@ export default {
       background:	rgb(64,158,255);
       border-radius: 10px;
       border: none;
-        &:active ,&:hover {
-    background-color: 	rgb(102,177,255);
+      cursor: pointer;
+      &:active ,&:hover {
+        background-color: 	rgb(102,177,255);
     }
     }
   }

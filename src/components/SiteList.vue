@@ -4,7 +4,7 @@
       <li class="content" v-for="(i, index) in siteList" :key="index">
         <div class="site" @click="go(i.url)">
           <div class="logo">
-            <img :src="`${i.url}/favicon.ico`" :onerror="imgDefault" />
+            <img :src="`${i.url}favicon.ico`" :onerror="imgDefault" />
           </div>
           <div class="close" @click.stop="closeSite(i)">
             <svg class="icon">
@@ -29,12 +29,11 @@
     <!-- dialog -->
     <wb-dialog
         :visible="visible"
-        title="设置标题"
+        title="请输入新增网址信息"
         :showClose="true"
         :modal="true"
         @closeBefore="beforeClose"
     >
-      <!--      <template slot="header"> 头部标题 </template>-->
       <template>
         <div class="a">
           <span style="margin-right: 1em">站点名称</span>
@@ -78,8 +77,16 @@ export default {
           text: "知乎",
         },
         {
-          url: "https://www.qq.com/",
-          text: "腾讯",
+          url: "https://stackoverflow.com/",
+          text: "IT问答",
+        },
+        {
+          url: "https://github.com/",
+          text: "GitHub",
+        },
+        {
+          url: "https://developer.mozilla.org/",
+          text: "MDN",
         },
       ],
       imgDefault: `this.src="${require("../assets/windbell.png")}"`,
@@ -117,10 +124,9 @@ export default {
   methods: {
     //整理用户输入地址
     urlRule(url) {
-      console.log('参数',url);
       // 判断如果url没有http开头
       if (url.indexOf("http") !== 0) {
-       alert("输入地址有误，重新输入！");
+        this.$message('输入网址不合法，请重新输入',{duration:1000,showClose:false,enableHtml:false,position:'top'})
       } else {
         return url
           .replace("https://", "")
@@ -135,13 +141,7 @@ export default {
     },
     //站点新增
     addSite() {
-      // let content = prompt("请输入新增网址：");
-      // // 后期用dialog改造这里
-      // let addsiteList = {
-      //   url: content,
-      //   text: this.urlRule(content).charAt(0),
-      // };
-      // this.siteList.push(addsiteList);
+
       this.visible = true
     },
     //站点删除
@@ -154,13 +154,14 @@ export default {
         //  未填地址
         //  关闭dialog
        if(!this.siteUrl){
-         alert('地址不能为空')
+         this.$message('站点网址不能为空，请重新输入',{duration:1000,showClose:false,enableHtml:false,position:'top'})
        }else{
        let addsiteList = {
         url: this.siteUrl,
-        text: this.siteName || this.urlRule(this.siteUrl).charAt(0),
+        text: this.siteName || this.urlRule(this.siteUrl).charAt(0).toUpperCase(),
       }
       this.siteList.push(addsiteList)
+      this.$message('保存成功',{duration:1000,showClose:false,enableHtml:false,position:'top'})
       this.beforeClose(false)
        }
       // console.log(this.siteUrl,this.urlRule(this.siteUrl));
@@ -198,10 +199,6 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* 站点背景 */
-    // background-color: rgba(211, 211, 211,0.1);
-    // pc端样式
-    // cursor: pointer;
     > .logo {
       width: 64px;
       height: 64px;
@@ -247,6 +244,7 @@ export default {
     background-color: rgba(211, 211, 211, 0.1);
   }
 }
+
 .b{
   &>.icon{
     width: 0.5em;
@@ -255,6 +253,9 @@ export default {
     margin-right: 0.5em;
     fill:red
   }
+}
+.wb-button{
+  margin-right: 1em;
 }
 @media (min-width: 500px) {
   .siteList {
