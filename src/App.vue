@@ -31,7 +31,7 @@ a {
 }
 #app {
   height: 100vh;
-  background-image: url(./assets/wallhaven.png);
+  background-image: url(./assets/wallhaven.jpg);
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
