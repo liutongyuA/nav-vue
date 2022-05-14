@@ -75,16 +75,5 @@ export default {
     margin-bottom: 100px;
     }
   }
-// header{
-//     margin: 20px;
-// }
-/* pc端 */
-// @media (min-width:500px) {
-//     header{
-//     margin-top: 60px;
-//     margin-bottom: 100px;
-// }
-// }
-
 
 </style>

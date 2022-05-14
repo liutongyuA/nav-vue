@@ -52,7 +52,6 @@
         <wb-button @click="beforeClose(false)">取消</wb-button>
       </template>
     </wb-dialog>
-
   </div>
 </template>
 
@@ -141,7 +140,6 @@ export default {
     },
     //站点新增
     addSite() {
-
       this.visible = true
     },
     //站点删除
@@ -151,8 +149,7 @@ export default {
     },
     // dialog
      confirm(){
-        //  未填地址
-        //  关闭dialog
+        //  未填地址 关闭dialog
        if(!this.siteUrl){
          this.$message('站点网址不能为空，请重新输入',{duration:1000,showClose:false,enableHtml:false,position:'top'})
        }else{
@@ -164,7 +161,6 @@ export default {
       this.$message('保存成功',{duration:1000,showClose:false,enableHtml:false,position:'top'})
       this.beforeClose(false)
        }
-      // console.log(this.siteUrl,this.urlRule(this.siteUrl));
     },
     //关闭前回调
     beforeClose(e){
