@@ -111,14 +111,10 @@ export default {
   },
 
   mounted(){
-      window.addEventListener('beforeunload',()=>{
-          localStorage.setItem("siteKey",JSON.stringify(this.siteList))
-      })
+      window.addEventListener('beforeunload',this.beforeunload)
   },
   destroyed() {
-    window.removeEventListener('beforeunload',()=>{
-          localStorage.setItem("siteKey",JSON.stringify(this.siteList))
-      })
+    window.removeEventListener('beforeunload',this.beforeunload)
   },
   methods: {
     //整理用户输入地址
@@ -167,6 +163,10 @@ export default {
       this.siteName=''
       this.siteUrl=''
       this.visible = e
+    },
+    //监听事件的回调
+    beforeunload(){
+      localStorage.setItem("siteKey",JSON.stringify(this.siteList))
     }
   },
 };
